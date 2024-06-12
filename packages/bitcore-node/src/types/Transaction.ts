@@ -9,6 +9,7 @@ export interface TransactionJSON {
   blockTimeNormalized: string;
   coinbase: boolean;
   raw: string;
+  raw: string;
   fee: number;
   size: number;
   locktime: number;
