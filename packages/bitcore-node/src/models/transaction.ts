@@ -92,12 +92,14 @@ export interface TxOp {
         blockTime?: Date;
         blockTimeNormalized?: Date;
         coinbase: boolean;
+        raw: parentTx.raw,        
         fee: number;
         size: number;
         locktime: number;
         inputCount: number;
         outputCount: number;
         value: number;
+        raw: string;
         wallets: Array<ObjectID>;
         mempoolTime?: Date;
       };
@@ -371,6 +373,7 @@ export class TransactionModel extends BaseTransaction<IBtcTransaction> {
                 blockTime,
                 blockTimeNormalized,
                 coinbase: tx.isCoinbase(),
+                raw: tx.toBuffer().toString('hex'),
                 fee,
                 size: tx.toBuffer().length,
                 locktime: tx.nLockTime,
@@ -737,6 +740,7 @@ export class TransactionModel extends BaseTransaction<IBtcTransaction> {
       locktime: tx.locktime || -1,
       inputCount: tx.inputCount || -1,
       outputCount: tx.outputCount || -1,
+      raw: tx.raw || '',
       size: tx.size || -1,
       fee: tx.fee || -1,
       value: tx.value || -1
